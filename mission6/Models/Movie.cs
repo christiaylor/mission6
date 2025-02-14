@@ -18,8 +18,12 @@ namespace mission6.Models
         public string Director { get; set; }
         [Required]
         public string Rating { get; set; }
+
+        // Non Required fields
         public bool? Edited { get; set; }
         public string? LentTo { get; set; }
+
+        [MaxLength(25)]
         public string? Notes { get; set; }
     }
 }
