@@ -9,7 +9,7 @@ namespace mission6.Models
         [Required]
         public int Id { get; set; }
         [Required]
-        public string Category { get; set; }
+        public int Category { get; set; }
         [Required]
         public string Title { get; set; }
         [Required]
@@ -22,6 +22,8 @@ namespace mission6.Models
         // Non Required fields
         public bool? Edited { get; set; }
         public string? LentTo { get; set; }
+        public string? CopiedToPlex { get; set; }
+
 
         [MaxLength(25)]
         public string? Notes { get; set; }
