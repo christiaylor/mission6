@@ -38,6 +38,15 @@ namespace mission6.Controllers
             return View("NewMovie", response);
         }
 
+        public IActionResult SeeMovies()
+        {
+            var movies = _context.Movies
+                .OrderBy(x => x.Year).ToList();
+                
+            return View(movies);
+
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
