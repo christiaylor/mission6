@@ -23,6 +23,8 @@ namespace mission6.Controllers
             return View();
         }
 
+
+
         [HttpGet]
         public IActionResult NewMovie()
         {
@@ -32,13 +34,21 @@ namespace mission6.Controllers
 
         [HttpPost]
         public IActionResult NewMovie(Movie response)
-        {`
-            _context.Movies.Add(response); // Add record to database
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Categories = _context.Categories.ToList(); // Ensure ViewBag is set
+                return View("NewMovie", response);
+            }
+
+            _context.Movies.Add(response);
             _context.SaveChanges();
 
-            return View("NewMovie", response);
+            return RedirectToAction("SeeMovies"); // Redirect to avoid resubmission issues
         }
 
+
+        [HttpGet]
         public IActionResult SeeMovies()
         {
             var movies = _context.Movies
@@ -48,6 +58,7 @@ namespace mission6.Controllers
 
         }
 
+        [HttpGet]
         public IActionResult Edit(int id)
         {
             var recordToEdit = _context.Movies
@@ -63,7 +74,6 @@ namespace mission6.Controllers
         public IActionResult Edit(Movie updatedInfo)
         {
             _context.Update(updatedInfo);
-        [HttpGet]
             _context.SaveChanges();
 
             return RedirectToAction("SeeMovies");
