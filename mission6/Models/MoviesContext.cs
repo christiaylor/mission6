@@ -12,5 +12,4 @@ namespace mission6.Models
         public DbSet<Category> Categories { get; set; }
 
         }
-    }
-}
+  }
