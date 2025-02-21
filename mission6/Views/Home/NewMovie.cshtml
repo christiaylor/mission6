@@ -9,6 +9,8 @@
 @* Form to add movies!! *@
 <form method="post">
 
+	<input type="hidden" asp-for="MovieId"/>
+
 	<select asp-for="CategoryId" required>
 	@foreach (Category c in ViewBag.Categories)
 	{

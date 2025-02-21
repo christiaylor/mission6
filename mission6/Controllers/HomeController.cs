@@ -26,14 +26,13 @@ namespace mission6.Controllers
         [HttpGet]
         public IActionResult NewMovie()
         {
-            ViewBag.Categories = _context.Categories
-                .ToList();
-            return View();
+            ViewBag.Categories = _context.Categories.ToList();
+            return View("NewMovie", new Movie());
         }
 
         [HttpPost]
         public IActionResult NewMovie(Movie response)
-        {
+        {`
             _context.Movies.Add(response); // Add record to database
             _context.SaveChanges();
 
@@ -48,6 +47,44 @@ namespace mission6.Controllers
             return View(movies);
 
         }
+
+        public IActionResult Edit(int id)
+        {
+            var recordToEdit = _context.Movies
+                .Single(x => x.MovieId == id);
+
+            ViewBag.Categories = _context.Categories
+            .ToList();
+
+            return View("NewMovie", recordToEdit);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Movie updatedInfo)
+        {
+            _context.Update(updatedInfo);
+        [HttpGet]
+            _context.SaveChanges();
+
+            return RedirectToAction("SeeMovies");
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var recordToDelete = _context.Movies
+                .Single(x => x.MovieId == id);
+
+            return View(recordToDelete);
+        }
+        [HttpPost]
+        public IActionResult Delete(Movie movie)
+        {
+            _context.Remove(movie);
+            _context.SaveChanges();
+            return RedirectToAction("SeeMovies");
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
