@@ -26,6 +26,8 @@ namespace mission6.Controllers
         [HttpGet]
         public IActionResult NewMovie()
         {
+            ViewBag.Categories = _context.Categories
+                .ToList();
             return View();
         }
 

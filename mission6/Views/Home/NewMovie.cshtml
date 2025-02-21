@@ -9,14 +9,20 @@
 @* Form to add movies!! *@
 <form method="post">
 
-	<label asp-for="CategoryId">Category ID: </label>
-	<input asp-for="CategoryId" required/>
+	<select asp-for="CategoryId" required>
+	@foreach (Category c in ViewBag.Categories)
+	{
+			<option value="@c.CategoryId">@c.CategoryName</option>
+	}
+	</select>
+	@* <label asp-for="CategoryId">Category ID: </label> *@
+	@* <input asp-for="CategoryId" required/> *@
 	<br />
 	<label asp-for="Title">Title: </label>
 	<input asp-for=Title required/>
 	<br />
 	<label asp-for="Year">Year: </label>
-	<input asp-for="Year" required/>
+	<input asp-for="Year" required min="1888"/>
 	<br />
 	<label asp-for="Director">Director: </label>
 	<input asp-for="Director" required/>
